@@ -1,4 +1,4 @@
-package aed3;
+
 import java.io.*;
 
 public interface Entidade  {

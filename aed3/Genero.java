@@ -1,4 +1,4 @@
-package aed3;
+
 import java.io.*;
 
 public class Genero implements Entidade {
@@ -28,7 +28,7 @@ public class Genero implements Entidade {
 
     public String toString() {
         return "\nCódigo: " + this.id +
-               "\nNome: " + this.nome;
+               "\t\tNome: " + this.nome;
     }
 
     public byte[] getByteArray() throws IOException {

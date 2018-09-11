@@ -1,15 +1,24 @@
-package aed3;
+
 
 import java.util.Scanner;
+
+//import com.sun.tools.internal.xjc.reader.gbind.OneOrMore;
 
 public class CrudGeneros {
 
     private static Scanner console = new Scanner(System.in);
 
+    private ArquivoIndexado<Genero> arqGeneros;
+
+    public CrudGeneros() throws Exception{
+        this.arqGeneros = new ArquivoIndexado<>(Genero.class.getConstructor(), "genero_dados.db", "genero_dados.idx");
+    }
+
     /**
      * Método principal, cujo objetivo é criar uma interface para o usuário
      */
-    public static void mainmenu(ArquivoIndexado<Genero> arqGeneros) {
+    /*
+        public  void mainmenu(ArquivoIndexado<Genero> arqGeneros) {
 
         try {
 
@@ -42,10 +51,10 @@ public class CrudGeneros {
        } catch(Exception e) {
            e.printStackTrace();
        }
-    }
+    }*/
 
-
-   public static void listarGeneros(ArquivoIndexado<Genero> arqGeneros) throws Exception {
+   
+   public  void listarGeneros() throws Exception {
 
        Object[] obj = arqGeneros.listar();
 
@@ -56,8 +65,9 @@ public class CrudGeneros {
        pausa();
 
    }
+   
 
-   public static void incluirGenero(ArquivoIndexado<Genero> arqGeneros) throws Exception {
+   public  void incluirGenero() throws Exception {
        System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
        String nome = console.nextLine();
 
@@ -73,8 +83,7 @@ public class CrudGeneros {
        pausa();
    }
 
-
-   public static void alterarGenero(ArquivoIndexado<Genero> arqGeneros) throws Exception {
+   public  void alterarGenero() throws Exception {
 
        System.out.println("\nALTERAÇÃO DE GENERO");
 
@@ -113,9 +122,9 @@ public class CrudGeneros {
        pausa();
 
    }
-
-
-   public static void excluirGenero(ArquivoIndexado<Genero> arqGeneros) throws Exception {
+   
+   
+   public  void excluirGenero() throws Exception {
 
        System.out.println("\nEXCLUSÃO DE GENERO");
 
@@ -143,27 +152,19 @@ public class CrudGeneros {
 
    }
 
+   
+   public  Genero buscarGenero(int codigo) throws Exception {
 
-   public static void buscarGenero(ArquivoIndexado<Genero> arqGeneros) throws Exception {
+        Genero obj = null;
+        if(codigo > 0)
+            obj = (Genero)arqGeneros.buscar(codigo);
+        return obj;
 
-       System.out.println("\nBUSCA DE Genero POR CÓDIGO");
-
-       int codigo;
-       System.out.print("Código: ");
-       codigo = Integer.valueOf(console.nextLine());
-       if(codigo <=0)
-           return;
-
-       Genero obj;
-       if( (obj = (Genero)arqGeneros.buscar(codigo))!=null )
-           System.out.println(obj);
-       else
-           System.out.println("Genero não encontrado");
-       pausa();
 
    }
+   
 
-   public static boolean buscarGenero(ArquivoIndexado<Genero> arqGeneros, int n) throws Exception {
+  /* public static boolean buscarGenero(ArquivoIndexado<Genero> arqGeneros, int n) throws Exception {
        int codigo = Integer.valueOf(n);
        if(codigo <=0)
            return false;
@@ -176,7 +177,7 @@ public class CrudGeneros {
            return false;
         }
 
-   }
+   }*/
 
 
 
@@ -184,6 +185,7 @@ public class CrudGeneros {
         System.out.println("\nPressione ENTER para continuar ...");
         console.nextLine();
     }
+    
 
 
 }
