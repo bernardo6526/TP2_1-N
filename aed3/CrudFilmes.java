@@ -242,6 +242,26 @@ public class CrudFilmes {
         return id;
 
     }*/
+    
+     /**
+    *   @param int idGenero id do genero a ser pesquisado
+    *   Busca o numero de vezes em que o genero pesquisado aparece na lista de filmes
+    *   @return resp numero de vezes em que o genero foi encontrado
+    */
+    public static int listarGenero(int idGenero) throws Exception {
+        int resp = 0;
+
+        Object[] obj = arqFilmes.listar();
+
+        //Realiza a pesquisa enquanto houverem filmes
+        //Adiciona ao somador cada iteração correspondente ao genero pesquisado
+        for(int i=0; i<obj.length; i++) {
+          if( (int)((Filme)obj[i]).getIdGenero() == idGenero )
+            resp++;
+        }
+
+        return resp;
+    }
 
 
 }
