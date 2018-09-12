@@ -59,7 +59,7 @@ public class MainProgram {
 				System.out.println("Menu:\n"+
 				"0 - Sair;\n"+
 				"1 - Lista Filmes\n"+
-				"2- Incluir filme\n"+
+				"2 - Incluir filme\n"+
 				"3 - Alterar filme;\n"+
 				"4 - Excluir filme;\n"+
 				"5 - Consultar filme;");
@@ -123,7 +123,7 @@ public class MainProgram {
                    case 1: crudG.listarGeneros(); break;
                    case 2: crudG.incluirGenero(); break;
                    case 3:crudG.alterarGenero() ; break;
-                   case 4: crudG.excluirGenero(); break;
+                   case 4: crudG.excluirGenero( crudF ); break;
                    case 5: ; break;
 
                    case 0: break;
