@@ -17,83 +17,23 @@ public class CrudFilmes {
     }
 
 
-    public  void listarFilmes() throws Exception {
+    public Filme[] listarFilmes() throws Exception {
 
-        Object[] obj = arqFilmes.listar();
+        Object[] objs = arqFilmes.listar();
 
-        System.out.println("\nLISTA DE FILMES");
-        for(int i=0; i<obj.length; i++) {
-            System.out.println((Filme)obj[i]+"\n\n");
+        Filme[] listF = new Filme[objs.length];
+
+        for(int i=0; i<objs.length; i++) {
+            listF[i] = (Filme)objs[i];
         }
-        pausa();
 
-   }
-
-    public  void incluirFilme() throws Exception {
-
-        Scanner input = new Scanner(System.in);
-        String titulo,tituloOriginal,pais,diretor,sinopse;
-        short ano;
-        short min;
-        int idGenero;
-        Filme filme = null;
-
-        System.out.print("Titulo: ");
-        titulo = input.nextLine();
-
-        System.out.print("Titulo Original: ");
-        tituloOriginal = input.nextLine();
-
-        System.out.print("Pais de origem: ");
-        pais = input.nextLine();
-
-        System.out.print("Diretor: ");
-        diretor = input.nextLine();
-
-        System.out.print("Sinopse: ");
-        sinopse = input.nextLine();
-
-        System.out.print("Ano: ");
-        ano = input.nextShort();
-
-        System.out.print("Minutos filme: ");
-        min = input.nextShort();
-
-        
-
-        boolean isGenero = false;
-
-        Genero obj =null;
-
-        try{
-            crudGen.listarGeneros();
-            do{
-                System.out.print("Id do Gênero do filme: ");
-            
-                idGenero = input.nextInt();
-
-                obj = crudGen.buscarGenero(idGenero);
-
-                if(obj == null)
-                    System.out.println("Genero inválido!");
-                else{
-                    System.out.println("Genero : " + obj.getNome());
-                    isGenero = true;
-                }
-                    
-
-            }while(!isGenero);
-        }catch(Exception e ){e.printStackTrace();}
-
-
-        System.out.print("Insira 1 para confirma inclusão ou 0 para cancelar: ");
-        if(input.nextByte() == 1)
-            filme = new Filme(titulo,tituloOriginal,pais,ano,min,diretor,sinopse,obj.getId());
-            int id = arqFilmes.incluir(filme);
-            System.out.println("Filme incluído com ID: "+id);
+        return listF;
+    }
+    public void  incluirFilme(Filme filme ) throws Exception {
+        int id = arqFilmes.incluir(filme);
+        System.out.println("Filme incluído com ID: "+id);
 
         pausa();
-    
     }
 
    /*
@@ -168,7 +108,7 @@ public class CrudFilmes {
 
    }*/
 
-   /*
+   
    public  void excluirFilme() throws Exception {
 
        System.out.println("\nEXCLUSÃO DE FILME");
@@ -195,9 +135,8 @@ public class CrudFilmes {
            System.out.println("Filme não encontrado");
        pausa();
 
-   }*/
+   }
 
-   /*
    public  void buscarFilme() throws Exception {
 
        System.out.println("\nBUSCA DE FILME POR CÓDIGO");
@@ -215,33 +154,10 @@ public class CrudFilmes {
            System.out.println("Filme não encontrado");
        pausa();
 
-   }*/
+   }
    
     public  void pausa() throws Exception {
         System.out.println("\nPressione ENTER para continuar ...");
         console.nextLine();
     }
-
-    /*
-    public int  verificarId() throws Exception{
-        boolean resp = false;
-        int id = 0;
-        crudGen.listarGeneros();
-
-
-        System.out.println("Digite o código do genero: ");
-        id = Integer.valueOf(console.nextLine());
-
-        Genero obj;
-
-        if((obj = crudGen.buscarGenero(id) ) != null)
-            System.out.println(b);
-        else
-            id = -1;
-
-        return id;
-
-    }*/
-
-
 }

@@ -5,8 +5,7 @@ public class Genero implements Entidade {
     protected int    id;
     protected String nome;
 
-    public Genero(int c, String t) {
-        this.id = c;
+    public Genero(String t) {
         this.nome = t;
     }
     public Genero() {

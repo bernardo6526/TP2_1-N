@@ -14,71 +14,24 @@ public class CrudGeneros {
         this.arqGeneros = new ArquivoIndexado<>(Genero.class.getConstructor(), "genero_dados.db", "genero_dados.idx");
     }
 
-    /**
-     * Método principal, cujo objetivo é criar uma interface para o usuário
-     */
-    /*
-        public  void mainmenu(ArquivoIndexado<Genero> arqGeneros) {
+   public  Genero[] listarGeneros() throws Exception {
 
-        try {
+       Object[] objs = arqGeneros.listar();
 
-            // menu
-           int opcao;
-           do {
-               System.out.println("\n\nGESTÃO DE GENEROS");
-               System.out.println("-----------------------------\n");
-               System.out.println("1 - Listar");
-               System.out.println("2 - Incluir");
-               System.out.println("3 - Alterar");
-               System.out.println("4 - Excluir");
-               System.out.println("5 - Buscar");
-               System.out.println("0 - Sair");
-               System.out.print("\nOpcao: ");
-               opcao = Integer.valueOf(console.nextLine());
-
-               switch(opcao) {
-                   case 1: listarGeneros(arqGeneros); break;
-                   case 2: incluirGenero(arqGeneros); break;
-                   case 3: alterarGenero(arqGeneros); break;
-                   case 4: excluirGenero(arqGeneros); break;
-                   case 5: buscarGenero(arqGeneros); break;
-
-                   case 0: break;
-                   default: System.out.println("Opção inválida");
-               }
-
-           } while(opcao!=0);
-       } catch(Exception e) {
-           e.printStackTrace();
+       Genero[] listGen = new Genero[objs.length];
+       
+       for(int i=0; i<objs.length; i++) {
+           listGen[i] = (Genero)objs[i];
        }
-    }*/
-
-   
-   public  void listarGeneros() throws Exception {
-
-       Object[] obj = arqGeneros.listar();
-
-       System.out.println("\nLISTA DE GENEROS");
-       for(int i=0; i<obj.length; i++) {
-           System.out.println((Genero)obj[i]);
-       }
-       pausa();
-
+       
+       return listGen;
    }
    
 
-   public  void incluirGenero() throws Exception {
-       System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
-       String nome = console.nextLine();
-
-       System.out.print("\nNome: " + nome
-       + "\nEsse dado está correto? [s/n]: ");
-       char confirma = console.nextLine().charAt(0);
-       if(confirma=='s' || confirma=='S') {
-           Genero obj = new Genero(-1, nome);
+   public  void incluirGenero(Genero obj) throws Exception {
+       
            int id = arqGeneros.incluir(obj);
            System.out.println("Genero incluído com ID: "+id);
-       }
 
        pausa();
    }
@@ -124,32 +77,9 @@ public class CrudGeneros {
    }
    
    
-   public  void excluirGenero() throws Exception {
+   public  boolean excluirGenero(int id) throws Exception {
 
-       System.out.println("\nEXCLUSÃO DE GENERO");
-
-       int id;
-       System.out.print("ID do Genero: ");
-       id = Integer.valueOf(console.nextLine());
-       if(id <=0)
-           return;
-
-       Genero obj;
-       if( (obj = (Genero)arqGeneros.buscar(id))!=null ) {
-            System.out.println(obj);
-
-            System.out.print("\nConfirma exclusão? ");
-            char confirma = console.nextLine().charAt(0);
-            if(confirma=='s' || confirma=='S') {
-                if( arqGeneros.excluir(id) ) {
-                    System.out.println("Genero excluído.");
-                }
-            }
-       }
-       else
-           System.out.println("Genero não encontrado");
-       pausa();
-
+      return arqGeneros.excluir(id); 
    }
 
    

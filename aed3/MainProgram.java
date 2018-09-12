@@ -72,25 +72,26 @@ public class MainProgram {
 							System.out.println("Obrigado por utilizar o CRUD de filmes!");
 							break;
 						case 1:
-							crudF.listarFilmes();
+							System.out.println("\t\t---Lista de filmes--\n");
+							Filme[] listaF = crudF.listarFilmes();
+
+							for(int i = 0; i < listaF.length;i++)
+								System.out.println(listaF[i]+"\n\n");
+
 							break;
 						case 2:	
-							crudF.incluirFilme();
+							Filme fil = criarObjetoFilme();
+							if(fil!=null)
+								crudF.incluirFilme(fil);
 							break;
 						case 3:
 							System.out.println("Insira o ID do filme a ser alterado: ");
 							break;
 						case 4:
-							System.out.print("Insira o ID do filme a ser excluído :");
-							id = input.nextInt();
-							System.out.print("Deseja confirma a exclusão? Insira (1):");
-							if(input.nextByte() == 1)
-								//crud.delete(id);
-
+							crudF.excluirFilme();
 							break;
 						case 5 :
-							System.out.print("Insira o ID do filme a ser pesquisado :");
-							id = input.nextInt();
+							crudF.buscarFilme();
 						break;
 						default:
 							System.out.println("Opção inválida!");
@@ -120,10 +121,44 @@ public class MainProgram {
                opcao = input.nextInt();
 
                switch(opcao) {
-                   case 1: crudG.listarGeneros(); break;
-                   case 2: crudG.incluirGenero(); break;
+					case 1:
+						System.out.println("\t\t---Lista de Generos---");
+						Genero[] listaGen = crudG.listarGeneros();
+						for(int i = 0; i < listaGen.length; i++)
+							System.out.println(listaGen[i]+"\n\n");
+				   	break;
+					case 2:
+						Genero gen = criaObjetoGenero();
+						if(gen!=null) 
+							crudG.incluirGenero(gen);  
+					break;
                    case 3:crudG.alterarGenero() ; break;
-                   case 4: crudG.excluirGenero(); break;
+				   case 4:						
+				   		int id;
+						Genero obj;
+
+				  		System.out.println("\nEXCLUSÃO DE GENERO");
+						System.out.print("ID do Genero: ");
+
+						id = input.nextInt();
+						if(id > 0){
+							obj = crudG.buscarGenero(id);
+							if(obj != null){
+								System.out.print("\nConfirma exclusão? 1 - sim ou 0 - não ");
+								int confirma = input.nextInt();
+								if(confirma=='s' || confirma=='S'){
+									if(crudG.excluirGenero(id));
+										System.out.println("\nGenero excluído : Nome = "+obj.getNome());	
+								}
+								
+							}
+							else
+								System.out.println("\nGenero não encontrado!");
+
+						}
+						else
+							System.out.println("ID inválido!\n"); 
+					break;
                    case 5: ; break;
 
                    case 0: break;
@@ -134,6 +169,84 @@ public class MainProgram {
        } catch(Exception e) {
            e.printStackTrace();
        }
+	}
+
+	public static Filme criarObjetoFilme(){
+
+		Scanner input = new Scanner(System.in);
+        String titulo,tituloOriginal,pais,diretor,sinopse;
+        short ano;
+        short min;
+        int idGenero;
+        Filme filme = null;
+
+        System.out.print("Titulo: ");
+        titulo = input.nextLine();
+
+        System.out.print("Titulo Original: ");
+        tituloOriginal = input.nextLine();
+
+        System.out.print("Pais de origem: ");
+        pais = input.nextLine();
+
+        System.out.print("Diretor: ");
+        diretor = input.nextLine();
+
+        System.out.print("Sinopse: ");
+        sinopse = input.nextLine();
+
+        System.out.print("Ano: ");
+        ano = input.nextShort();
+
+        System.out.print("Minutos filme: ");
+        min = input.nextShort();
+
+		boolean isGenero = false;
+
+        Genero obj =null;
+
+        try{
+            crudG.listarGeneros();
+            do{
+                System.out.print("Id do Gênero do filme: ");
+            
+                idGenero = input.nextInt();
+
+                obj = crudG.buscarGenero(idGenero);
+
+                if(obj == null)
+                    System.out.println("Genero inválido!");
+                else{
+                    System.out.println("Genero : " + obj.getNome());
+                    isGenero = true;
+                }
+                    
+
+            }while(!isGenero);
+        }catch(Exception e ){e.printStackTrace();}
+		
+		System.out.print("Insira 1 para confirma inclusão ou qualquer coisa para cancelar: ");
+        if(input.nextByte() == 1)
+			filme = new Filme(titulo,tituloOriginal,pais,ano,min,diretor,sinopse,obj.getId());
+		
+		return filme;
+	}
+
+	public static Genero criaObjetoGenero(){
+		Genero obj = null;
+		
+		System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
+		String nome = input.nextLine();
+
+		System.out.print("\nNome: " + nome
+		+ "\nEsse dado está correto? [s/n]: ");
+		char confirma = input.nextLine().charAt(0);
+
+
+		if(confirma=='s' || confirma=='S') 
+			 obj = new Genero(nome);
+
+		return obj;
 	}
 
 }
