@@ -124,7 +124,7 @@ public class CrudGeneros {
    }
    
    
-   public  void excluirGenero() throws Exception {
+   public void excluirGenero(CrudFilmes crudF) throws Exception {
 
        System.out.println("\nEXCLUSÃO DE GENERO");
 
@@ -137,19 +137,25 @@ public class CrudGeneros {
        Genero obj;
        if( (obj = (Genero)arqGeneros.buscar(id))!=null ) {
             System.out.println(obj);
-
-            System.out.print("\nConfirma exclusão? ");
-            char confirma = console.nextLine().charAt(0);
-            if(confirma=='s' || confirma=='S') {
-                if( arqGeneros.excluir(id) ) {
-                    System.out.println("Genero excluído.");
-                }
-            }
+            //Verifica quantos filmes tem o genero pesquisado
+            int nFilmes =  crudF.listarGenero(id);
+            //Caso tenha 0 filmes, continua o processo de exclusão
+            if( nFilmes == 0 ){
+              System.out.print("\nConfirma exclusão? ");
+              char confirma = console.nextLine().charAt(0);
+              if(confirma=='s' || confirma=='S'){
+                  //Tenta excluir arquivo, caso consiga exibe mensagem de sucesso
+                  if( arqGeneros.excluir(id) ) 
+                      System.out.println("Genero excluído.");
+              }
+            }//If de exclusao
+            else
+              System.out.println("Há " + nFilmes + " filme com esse genero, primeiro exclua os filmes antes de tentar excluir o genero");
        }
        else
            System.out.println("Genero não encontrado");
-       pausa();
 
+       pausa();
    }
 
    
