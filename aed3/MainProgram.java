@@ -14,15 +14,13 @@ import javax.lang.model.util.ElementScanner6;
 
 public class MainProgram {
 	
-	private static Scanner input;
+	private static Scanner console;
 	private static CrudFilmes crudF;
 	private static CrudGeneros crudG;
-	private static ArquivoIndexado<Genero> arqGeneros;
-	private static ArquivoIndexado<Filme> arqFilmes;
 
 	public static void main(String[] args) {
-		input = new Scanner(System.in);	
-		byte choice = -1;
+		console = new Scanner(System.in);	
+		int opcao = -1;
 
 		RandomAccessFile arq;
 
@@ -35,17 +33,20 @@ public class MainProgram {
 
 			int id;
 
-			while(choice != 0) {
+			while(opcao != 0) {
 				System.out.print("\n\n\n-----GESTOR DE FILMES-----\n"+
 				"0 - Finalizar programa\n"+
 				"1 - Gerenciar filmes\n"+
 				"2 - Gerenciar Generos\n"+
 				"Inserir : ");
-				choice = input.nextByte();
-				if( choice == 1 )
+				opcao = Integer.valueOf(console.nextLine());
+				if( opcao == 1 )
 					MenuFilme();
-				else if(choice == 2)
-					MenuGenero();
+				else if(opcao == 2){
+					ViewGenero viewGen = new ViewGenero();
+					viewGen.menu();
+				}
+					
 				//TRATAR EXCEÇÕES
 			}		
 				
@@ -64,7 +65,7 @@ public class MainProgram {
 				"4 - Excluir filme;\n"+
 				"5 - Consultar filme;");
 				
-				choice = input.nextByte();
+				choice = console.nextByte();
 				int id;
 	
 				switch(choice) {
@@ -102,9 +103,9 @@ public class MainProgram {
 			e.printStackTrace();
 		}
 	}
-
+	/*
 	private static void MenuGenero(){
-		input = new Scanner(System.in);
+		console = new Scanner(System.in);
 		try {
             // menu
            int opcao;
@@ -118,37 +119,35 @@ public class MainProgram {
                System.out.println("5 - Buscar");
                System.out.println("0 - Sair");
                System.out.print("\nOpcao: ");
-               opcao = input.nextInt();
-
+               opcao = console.nextInt();
+			  
                switch(opcao) {
 					case 1:
-						System.out.println("\t\t---Lista de Generos---");
+						
 						Genero[] listaGen = crudG.listarGeneros();
 						for(int i = 0; i < listaGen.length; i++)
 							System.out.println(listaGen[i]+"\n\n");
 				   	break;
 					case 2:
-						Genero gen = criaObjetoGenero();
-						if(gen!=null) 
-							crudG.incluirGenero(gen);  
+						objGen = criaObjetoGenero();
+						if(objGen!=null) 
+							crudG.incluirGenero(objGen);  
 					break;
                    case 3:crudG.alterarGenero() ; break;
 				   case 4:						
-				   		int id;
-						Genero obj;
-
+			
 				  		System.out.println("\nEXCLUSÃO DE GENERO");
 						System.out.print("ID do Genero: ");
 
-						id = input.nextInt();
+						id = console.nextInt();
 						if(id > 0){
-							obj = crudG.buscarGenero(id);
-							if(obj != null){
+							objGen = crudG.buscarGenero(id);
+							if(objGen != null){
 								System.out.print("\nConfirma exclusão? 1 - sim ou 0 - não ");
-								int confirma = input.nextInt();
+								int confirma = console.nextInt();
 								if(confirma=='s' || confirma=='S'){
 									if(crudG.excluirGenero(id));
-										System.out.println("\nGenero excluído : Nome = "+obj.getNome());	
+										System.out.println("\nGenero excluído : Nome = "+objGen.getNome());	
 								}
 								
 							}
@@ -159,9 +158,25 @@ public class MainProgram {
 						else
 							System.out.println("ID inválido!\n"); 
 					break;
-                   case 5: ; break;
+				   case 5:
+					
+						System.out.print("ID do genero a ser busca :");
+						id = console.nextInt();
+							
+						if(id > 0){
+							objGen = crudG.buscarGenero(id);
+							if(objGen!=null)
+								System.out.println(objGen);
+							else
+								System.out.println("Genero não encontrado!");	
+						}
+						else
+							System.out.println("ID inválido!");
+					
+					break;		
 
-                   case 0: break;
+				   case 0: 
+				   break;
                    default: System.out.println("Opção inválida");
                }
 
@@ -169,11 +184,11 @@ public class MainProgram {
        } catch(Exception e) {
            e.printStackTrace();
        }
-	}
+	}*/
 
 	public static Filme criarObjetoFilme(){
 
-		Scanner input = new Scanner(System.in);
+		Scanner console = new Scanner(System.in);
         String titulo,tituloOriginal,pais,diretor,sinopse;
         short ano;
         short min;
@@ -181,25 +196,25 @@ public class MainProgram {
         Filme filme = null;
 
         System.out.print("Titulo: ");
-        titulo = input.nextLine();
+        titulo = console.nextLine();
 
         System.out.print("Titulo Original: ");
-        tituloOriginal = input.nextLine();
+        tituloOriginal = console.nextLine();
 
         System.out.print("Pais de origem: ");
-        pais = input.nextLine();
+        pais = console.nextLine();
 
         System.out.print("Diretor: ");
-        diretor = input.nextLine();
+        diretor = console.nextLine();
 
         System.out.print("Sinopse: ");
-        sinopse = input.nextLine();
+        sinopse = console.nextLine();
 
         System.out.print("Ano: ");
-        ano = input.nextShort();
+        ano = console.nextShort();
 
         System.out.print("Minutos filme: ");
-        min = input.nextShort();
+        min = console.nextShort();
 
 		boolean isGenero = false;
 
@@ -210,7 +225,7 @@ public class MainProgram {
             do{
                 System.out.print("Id do Gênero do filme: ");
             
-                idGenero = input.nextInt();
+                idGenero = console.nextInt();
 
                 obj = crudG.buscarGenero(idGenero);
 
@@ -226,27 +241,11 @@ public class MainProgram {
         }catch(Exception e ){e.printStackTrace();}
 		
 		System.out.print("Insira 1 para confirma inclusão ou qualquer coisa para cancelar: ");
-        if(input.nextByte() == 1)
+        if(console.nextByte() == 1)
 			filme = new Filme(titulo,tituloOriginal,pais,ano,min,diretor,sinopse,obj.getId());
 		
 		return filme;
 	}
 
-	public static Genero criaObjetoGenero(){
-		Genero obj = null;
-		
-		System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
-		String nome = input.nextLine();
-
-		System.out.print("\nNome: " + nome
-		+ "\nEsse dado está correto? [s/n]: ");
-		char confirma = input.nextLine().charAt(0);
-
-
-		if(confirma=='s' || confirma=='S') 
-			 obj = new Genero(nome);
-
-		return obj;
-	}
 
 }

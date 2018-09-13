@@ -36,49 +36,17 @@ public class CrudGeneros {
        pausa();
    }
 
-   public  void alterarGenero() throws Exception {
-
-       System.out.println("\nALTERAÇÃO DE GENERO");
-
-       int id;
-       System.out.print("ID do Genero: ");
-       id = Integer.valueOf(console.nextLine());
-       if(id <=0)
-           return;
-
-       Genero obj;
-       if( (obj = (Genero)arqGeneros.buscar(id))!=null ) {
-            System.out.println(obj);
-
-            System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
-            String nome = console.nextLine();
-
-            System.out.print("\nNome: " + nome
-            +  "\nEsse dado está correto? [s/n]: ");
-
-            if(nome.length()>0) {
-                System.out.print("\nConfirma alteração? ");
-                char confirma = console.nextLine().charAt(0);
-                if(confirma=='s' || confirma=='S') {
-
-                obj.nome = (nome.length()>0 ? nome : obj.nome);
-
-                if( arqGeneros.alterar(obj) )
-                        System.out.println("Genero alterado.");
-                    else
-                        System.out.println("Genero não pode ser alterado.");
-                }
-            }
-       }
-       else
-           System.out.println("Genero não encontrado");
-       pausa();
-
+   public void alterarGenero(Genero objAlterar)throws Exception{
+        if( arqGeneros.alterar(objAlterar) )
+            System.out.println("Genero alterado.");
+        else
+            System.out.println("Genero não pode ser alterado.");
+    
    }
    
    
    public  boolean excluirGenero(int id) throws Exception {
-
+     
       return arqGeneros.excluir(id); 
    }
 
