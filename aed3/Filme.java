@@ -102,6 +102,10 @@ public class Filme implements Entidade{
 	public int getId() {
 		return this.id;
 	}
+	
+	public int getIdGenero() {
+		return this.idGenero;
+	}
 
 	/*
 	 * Retorna um vetor de bytes(registro) do Filme corrente

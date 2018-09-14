@@ -60,7 +60,7 @@ public class MainProgram {
 				System.out.println("Menu:\n"+
 				"0 - Sair;\n"+
 				"1 - Lista Filmes\n"+
-				"2- Incluir filme\n"+
+				"2 - Incluir filme\n"+
 				"3 - Alterar filme;\n"+
 				"4 - Excluir filme;\n"+
 				"5 - Consultar filme;");
