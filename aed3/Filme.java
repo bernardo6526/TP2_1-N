@@ -4,15 +4,15 @@
 import java.io.*;
 
 public class Filme implements Entidade{
-	private int id;
-	private String titulo;
-	private String tituloOriginal;
-	private String pais;
-	private short ano;
-	private short duracao;
-	private String diretor;
-	private String sinopse;
-	private int idGenero;
+	protected int id;
+	protected String titulo;
+	protected String tituloOriginal;
+	protected String pais;
+	protected short ano;
+	protected short duracao;
+	protected String diretor;
+	protected String sinopse;
+	protected int idGenero;
 
 	public Filme() {
 	}//end Filme()

@@ -36,7 +36,7 @@ public class CrudFilmes {
         pausa();
     }
 
-   /*
+   
    public  void alterarFilme() throws Exception {
 
        System.out.println("\nALTERAÇÃO DE FILME");
@@ -88,7 +88,7 @@ public class CrudFilmes {
                 if(confirma=='s' || confirma=='S') {
 
                 obj.titulo = (titulo.length()>0 ? titulo : obj.titulo);
-                obj.titulo_original = (titulo_original.length()>0 ? titulo_original : obj.titulo_original);
+                obj.tituloOriginal = (titulo_original.length()>0 ? titulo_original : obj.tituloOriginal);
                 obj.pais = (pais.length()>0 ? pais : obj.pais);
                 obj.diretor = (diretor.length()>0 ? diretor : obj.diretor);
                 obj.sinopse = (sinopse.length()>0 ? sinopse : obj.sinopse);
@@ -106,7 +106,7 @@ public class CrudFilmes {
            System.out.println("Filme não encontrado");
        pausa();
 
-   }*/
+   }
 
    
    public  void excluirFilme() throws Exception {

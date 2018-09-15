@@ -86,7 +86,7 @@ public class MainProgram {
 								crudF.incluirFilme(fil);
 							break;
 						case 3:
-							System.out.println("Insira o ID do filme a ser alterado: ");
+                     crudF.alterarFilme();
 							break;
 						case 4:
 							crudF.excluirFilme();
