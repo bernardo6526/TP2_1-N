@@ -159,6 +159,7 @@ public class ViewFilme{
                 System.out.println("\t\tCaso não deseja alterar determinado campo apenas dê ENTER!");
                 Filme objNovo = criarObjetoGenero();
                 objAlterar = alterarCamposFilme(objAlterar, objNovo);
+                crudF.alterar(objAlterar);
 
             }
             else
