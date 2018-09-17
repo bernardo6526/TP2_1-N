@@ -1,5 +1,5 @@
 /*
- * Autores: Tulio N. Polido Lopes, Joao Victor da Silva, Gustavo Lescowicz Kotarsky, Temistocles Altivo Schwartz
+ * Autores: Ana Flávia Dias Rodrigues, Bernardo Victor de Souza e Silva, Bertone Cândido de Sousa Lima, Joao Victor da Silva,Temístocles Altivo Schwartz
  * Data: 21/08/2018
  * */
 
