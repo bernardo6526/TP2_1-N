@@ -26,7 +26,7 @@ public class MainProgram {
 
 		try{
 			crudG = new CrudGeneros();
-			crudF = new CrudFilmes(crudG);
+			crudF = new CrudFilmes();
 		}catch(Exception e){e.printStackTrace();}
 
 		System.out.println("Bem-vindo ao CRUD de filmes!");

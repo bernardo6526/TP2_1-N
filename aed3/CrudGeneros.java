@@ -47,7 +47,16 @@ public class CrudGeneros {
    
    public  boolean excluirGenero(int id) throws Exception {
      
-      return arqGeneros.excluir(id); 
+        boolean isExcluido = false; 
+
+        CrudFilmes crudF = new CrudFilmes();
+
+        int qtdFilmeRelacionados = crudF.listarGenero(id);
+
+        if(qtdFilmeRelacionados == 0)
+            isExcluido =  arqGeneros.excluir(id);
+
+        return isExcluido; 
    }
 
    
@@ -61,22 +70,6 @@ public class CrudGeneros {
 
    }
    
-
-  /* public static boolean buscarGenero(ArquivoIndexado<Genero> arqGeneros, int n) throws Exception {
-       int codigo = Integer.valueOf(n);
-       if(codigo <=0)
-           return false;
-
-       Genero obj;
-       if( (obj = (Genero)arqGeneros.buscar(codigo))!=null ){
-           return true;
-       }else{
-           System.out.println("Codigo nao encontrado. Tentar novamente.");
-           return false;
-        }
-
-   }*/
-
 
 
     public static void pausa() throws Exception {

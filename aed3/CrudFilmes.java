@@ -8,12 +8,10 @@ public class CrudFilmes {
 
     private static Scanner console = new Scanner(System.in);
     private static ArquivoIndexado<Filme> arqFilmes;
-    private static CrudGeneros crudGen;
 
 
-    public CrudFilmes(CrudGeneros crudGen) throws Exception{
+    public CrudFilmes() throws Exception{
         this.arqFilmes = new ArquivoIndexado<>(Filme.class.getConstructor(), "filme_dados.db", "filme_dados.idx");
-        this.crudGen = crudGen;
     }
 
 

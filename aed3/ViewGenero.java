@@ -39,6 +39,7 @@ public class ViewGenero{
                         crudG.incluirGenero(criarObjetoGenero());
                     break;
                     case 3:
+                        alterar();
                     break;
                     case 4:
                         excluir();
@@ -152,6 +153,8 @@ public class ViewGenero{
                 if(confirma=='s' || confirma=='S'){
                     if(crudG.excluirGenero(id))
                         System.out.println("Genero excluido com sucesso!");
+                    else
+                    System.out.println("Error Genero("+objGen.getNome()+") possui relacionamento com algum filme!");
 
                 }
             }
