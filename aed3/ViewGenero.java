@@ -5,7 +5,6 @@ import javax.lang.model.util.ElementScanner6;
 public class ViewGenero{
     private static CrudGeneros crudG;
     private static Scanner console;
-    private static Genero objGen;
 
     public ViewGenero(){}
 
@@ -30,29 +29,19 @@ public class ViewGenero{
                 System.out.print("\nOpcao: ");
                 opcao = Integer.valueOf(console.nextLine());
 
-                int id;
-                Genero objGen;
-
                 switch(opcao){
                     case 1:listarGeneros(crudG.listarGeneros());break;
-                    case 2:
-                        crudG.incluirGenero(criarObjetoGenero());
-                    break;
-                    case 3:
-                        alterar();
-                    break;
-                    case 4:
-                        excluir();
-                    break;
-                    case 5:
-                        busca();
-                    break;
+                    case 2:incluir();break;
+                    case 3:alterar();break;
+                    case 4:excluir();break;
+                    case 5: busca();break;
+                    default:System.out.println("\t\t---OPÇÃO INVALIDA--\n\n");break;
                 }
             }while(opcao!=0);
         }catch(Exception e){e.printStackTrace();}
     }
 
-    public Genero criarObjetoGenero(){
+    private Genero criarObjetoGenero(){
         Genero obj = null;
 		
 		System.out.print("Digite o dado do Genero a ser inserido. \nNome: ");
@@ -74,19 +63,29 @@ public class ViewGenero{
 		return obj;
     }
 
+    public void incluir() throws Exception{
+        Genero obj = criarObjetoGenero();
+        if(obj!=null){
+            crudG.incluirGenero(obj);
+            System.out.println("\t\t---Filme incluido com sucesso!---\n\n");
+        }
+            
+        
+    }
+
     public void busca() throws Exception{
         int id;
         System.out.print("ID do genero a ser busca :");
         id = Integer.valueOf(console.nextLine());
             
         if(id > 0){
-            objGen = crudG.buscarGenero(id);
+            Genero objGen = crudG.buscarGenero(id);
             if(objGen!=null)
                 System.out.println(objGen);
             else{
                 System.out.println("Genero não encontrado!");
                 System.out.println("\n\n---ID inválido!---");
-                System.out.println("1 - para tentar novaente");
+                System.out.print("Sim - para tentar novamente :");
                 char confirma = console.nextLine().charAt(0);
                 if(confirma=='s' || confirma=='S')
                     busca();
@@ -125,14 +124,15 @@ public class ViewGenero{
                         crudG.alterarGenero(objAlterar);
                     }
                 }
-
-
             }
+            else
+                System.out.println("Genero com id ="+id+" não encontrado!");
        }
        else{
            System.out.println("\n\n---ID inválido!---");
-           System.out.println("1 - para tentar novaente");
-           if(Integer.valueOf(console.nextLine()) == 1)
+           System.out.print("Sim - para tentar novamente :");
+           char confirma = console.nextLine().charAt(0);
+           if(confirma=='s' || confirma=='S')
             alterar();
 
        }
@@ -146,7 +146,7 @@ public class ViewGenero{
 
         id = Integer.valueOf(console.nextLine());
         if(id>0){
-            objGen = crudG.buscarGenero(id);
+            Genero objGen = crudG.buscarGenero(id);
             if(objGen!=null){
                 System.out.print("Deseja excluir o genero ("+objGen.getNome()+"). Sim - para confirma:");
                 confirma = console.nextLine().charAt(0);

@@ -27,14 +27,14 @@ public class CrudFilmes {
 
         return listF;
     }
+
     public void  incluirFilme(Filme filme ) throws Exception {
         int id = arqFilmes.incluir(filme);
         System.out.println("Filme incluído com ID: "+id);
 
-        pausa();
     }
 
-   
+   /*
    public  void alterarFilme() throws Exception {
 
        System.out.println("\nALTERAÇÃO DE FILME");
@@ -105,52 +105,22 @@ public class CrudFilmes {
        pausa();
 
    }
+   */
 
    
-   public  void excluirFilme() throws Exception {
+   public  boolean excluirFilme(int id) throws Exception {
 
-       System.out.println("\nEXCLUSÃO DE FILME");
-
-       int id;
-       System.out.print("ID do filme: ");
-       id = Integer.valueOf(console.nextLine());
-       if(id <=0)
-           return;
-
-       Filme obj;
-       if( (obj = (Filme)arqFilmes.buscar(id))!=null ) {
-            System.out.println(obj);
-
-            System.out.print("\nConfirma exclusão? ");
-            char confirma = console.nextLine().charAt(0);
-            if(confirma=='s' || confirma=='S') {
-                if( arqFilmes.excluir(id) ) {
-                    System.out.println("Filme excluído.");
-                }
-            }
-       }
-       else
-           System.out.println("Filme não encontrado");
-       pausa();
+   return arqFilmes.excluir(id);
 
    }
 
-   public  void buscarFilme() throws Exception {
+   public  Filme buscarFilme(int codigo) throws Exception {    
 
-       System.out.println("\nBUSCA DE FILME POR CÓDIGO");
+       Filme obj =null;
+       if(codigo > 0)
+           obj = (Filme)arqFilmes.buscar(codigo);
 
-       int codigo;
-       System.out.print("Código: ");
-       codigo = Integer.valueOf(console.nextLine());
-       if(codigo <=0)
-           return;
-
-       Filme obj;
-       if( (obj = (Filme)arqFilmes.buscar(codigo))!=null )
-           System.out.println(obj);
-       else
-           System.out.println("Filme não encontrado");
-       pausa();
+       return obj;
 
    }
    

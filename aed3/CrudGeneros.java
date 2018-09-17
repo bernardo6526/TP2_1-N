@@ -32,8 +32,6 @@ public class CrudGeneros {
        
            int id = arqGeneros.incluir(obj);
            System.out.println("Genero incluído com ID: "+id);
-
-       pausa();
    }
 
    public void alterarGenero(Genero objAlterar)throws Exception{
