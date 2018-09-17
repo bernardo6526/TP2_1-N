@@ -74,9 +74,16 @@ public class ViewFilme{
             do{
                 CrudGeneros crudG = new CrudGeneros();
                 Genero[] listaG = crudG.listarGeneros();
-                for (Genero var : listaG) {
-                    System.out.println(var);
+                if(listaG.length == 0){
+                    System.out.println("\n\n\t\t---Nenhum genero está registrado!----");
+                    System.out.println("Registre um  genero!");
+                    ViewGenero vwGen = new ViewGenero();
+                    vwGen.incluir();
                 }
+                else
+                    for (Genero var : listaG) {
+                        System.out.println(var);
+                    }
 				
                 System.out.print("Id do Gênero do filme: ");
             
@@ -147,10 +154,10 @@ public class ViewFilme{
     }
 
     public void alterar() throws Exception{
-        System.out.println("\nALTERAÇÃO DE GENERO");
+        System.out.println("\nALTERAÇÃO DE FILME");
 
        int id;
-       System.out.print("ID do Genero: ");
+       System.out.print("ID do filme: ");
        id = Integer.valueOf(console.nextLine());
 
        if(id > 0){
