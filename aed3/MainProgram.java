@@ -18,6 +18,9 @@ public class MainProgram {
 	private static CrudFilmes crudF;
 	private static CrudGeneros crudG;
 
+   /**
+    * Metodo Principal Main
+    */
 	public static void main(String[] args) {
 		console = new Scanner(System.in);	
 		int opcao = -1;
@@ -32,32 +35,35 @@ public class MainProgram {
 		System.out.println("Bem-vindo ao CRUD de filmes!");
 
 			int id;
-
+			ViewGenero viewGen = new ViewGenero();
 			while(opcao != 0) {
 				System.out.print("\n\n\n-----GESTOR DE FILMES-----\n"+
 				"0 - Finalizar programa\n"+
 				"1 - Gerenciar filmes\n"+
 				"2 - Gerenciar Generos\n"+
 				"Inserir : ");
-				opcao = Integer.valueOf(console.nextLine());
+				opcao = console.nextInt();
 				if( opcao == 1 )
 					MenuFilme();
 				else if(opcao == 2){
-					ViewGenero viewGen = new ViewGenero();
+					
 					viewGen.menu();
-				}
+				}//end else if
 					
 				//TRATAR EXCEÇÕES
-			}		
+			}//end while		
 				
 	}//end main()
-
+  
+   /**
+    * Menu de Filme(com todas as opções do CRUD)
+    */
 	private static void MenuFilme(){
-		byte choice = -1;
+		int choice = -1;
 
 		try{
 			while(choice != 0 ){
-				System.out.println("Menu:\n"+
+				System.out.println("\nMenu:\n"+
 				"0 - Sair;\n"+
 				"1 - Lista Filmes\n"+
 				"2 - Incluir filme\n"+
@@ -65,7 +71,8 @@ public class MainProgram {
 				"4 - Excluir filme;\n"+
 				"5 - Consultar filme;");
 				
-				choice = console.nextByte();
+				choice = console.nextInt();
+				System.out.println("choice : "+choice+"\n");
 				int id;
 	
 				switch(choice) {
@@ -86,7 +93,7 @@ public class MainProgram {
 								crudF.incluirFilme(fil);
 							break;
 						case 3:
-                     crudF.alterarFilme();
+                     		crudF.alterarFilme();
 							break;
 						case 4:
 							crudF.excluirFilme();
@@ -97,12 +104,17 @@ public class MainProgram {
 						default:
 							System.out.println("Opção inválida!");
 							break;
-						}
-				}
+				}//end switch
+			}//end while
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-	}
+		}//end catch
+	}//end MenuFilme
+
+  /**
+   * Cria um novo objeto de filme
+   * @return Filme objeto a ser inserido no arquivo(new Filme) 
+   */
 	public static Filme criarObjetoFilme(){
 
 		Scanner console = new Scanner(System.in);
@@ -151,18 +163,20 @@ public class MainProgram {
                 else{
                     System.out.println("Genero : " + obj.getNome());
                     isGenero = true;
-                }
+                }//end else
                     
 
             }while(!isGenero);
         }catch(Exception e ){e.printStackTrace();}
 		
 		System.out.print("Insira 1 para confirma inclusão ou qualquer coisa para cancelar: ");
-        if(console.nextByte() == 1)
+        byte op=console.nextByte();
+        if(op == 1){
 			filme = new Filme(titulo,tituloOriginal,pais,ano,min,diretor,sinopse,obj.getId());
-		
+        }//end if
 		return filme;
-	}
+	}//end criarObjetoFilme
+  
 
 
-}
+}//end MainProgram
