@@ -33,24 +33,27 @@ public class MainProgram {
 
 			int id;
 
-			while(opcao != 0) {
-				System.out.print("\n\n\n-----GESTOR DE FILMES-----\n"+
-				"0 - Finalizar programa\n"+
-				"1 - Gerenciar filmes\n"+
-				"2 - Gerenciar Generos\n"+
-				"Inserir : ");
-				opcao = Integer.valueOf(console.nextLine());
-				if( opcao == 1 ){
-					ViewFilme viewFilme = new ViewFilme();
-					viewFilme.menu();
+			try{
+				while(opcao != 0) {
+					System.out.print("\n\n\n-----GESTOR DE FILMES-----\n"+
+					"0 - Finalizar programa\n"+
+					"1 - Gerenciar filmes\n"+
+					"2 - Gerenciar Generos\n"+
+					"Inserir : ");
+					opcao = Integer.valueOf(console.nextLine());
+					if( opcao == 1 ){
+						ViewFilme viewFilme = new ViewFilme();
+						viewFilme.menu();
+					}
+					else if(opcao == 2){
+						ViewGenero viewGen = new ViewGenero();
+						viewGen.menu();
+					}
+						
+					//TRATAR EXCEÇÕES
 				}
-				else if(opcao == 2){
-					ViewGenero viewGen = new ViewGenero();
-					viewGen.menu();
-				}
+			}catch(Exception e){e.printStackTrace();}
 					
-				//TRATAR EXCEÇÕES
-			}		
 				
 	}//end main()
 

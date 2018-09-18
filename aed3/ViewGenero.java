@@ -6,15 +6,16 @@ public class ViewGenero{
     private static CrudGeneros crudG;
     private static Scanner console;
 
-    public ViewGenero(){}
+    public ViewGenero() throws Exception {
+        console = new Scanner(System.in);
+        crudG = new CrudGeneros();
+    }
 
     public void menu(){
         int opcao;
         
 
         try{
-            crudG = new CrudGeneros();
-            console = new Scanner(System.in);
         
 
             do{
